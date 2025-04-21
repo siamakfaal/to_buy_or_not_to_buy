@@ -1,0 +1,11 @@
+# src/to_buy_or_not_to_buy/BUILD.bazel
+
+load("@rules_python//python:defs.bzl", "py_library")
+
+py_library(
+    name = "to_buy_or_not_to_buy",
+    srcs = glob([
+        "**/*.py",
+    ]),
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,21 @@
+# test/helpers/BUILD.bazel
+
+load("@python_deps//:requirements.bzl", "requirement")
+
+py_test(
+    name = "test_mortgage",
+    srcs = ["test_mortgage.py"],
+    deps = [
+        "//src/to_buy_or_not_to_buy:to_buy_or_not_to_buy",
+        requirement("pytest"),
+    ],
+)
+
+py_test(
+    name = "test_rental",
+    srcs = ["test_rental.py"],
+    deps = [
+        "//src/to_buy_or_not_to_buy:to_buy_or_not_to_buy",
+        requirement("pytest"),
+    ],
+)
