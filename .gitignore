@@ -178,10 +178,10 @@ cython_debug/
 .DS_Store
 
 # Bazel output and working directories
-bazel-bin/
-bazel-out/
-bazel-testlogs/
-bazel-to_buy_or_not_to_buy/
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-to_buy_or_not_to_buy
 
 # Bazel module lockfile (optional: ignore if you don't want it tracked)
 MODULE.bazel.lock
