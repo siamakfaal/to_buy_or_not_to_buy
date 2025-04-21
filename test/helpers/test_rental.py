@@ -10,14 +10,14 @@ from src.to_buy_or_not_to_buy.types.variables import Rental
 class TestRentalPayments(unittest.TestCase):
     def setUp(self):
         self.rental = Rental(
-            application_fee=100.0,
-            rent=1200.0,
-            utilities=150.0,
-            insurance=600.0,  # annually
-            commute_cost=75.0,
-            gym_subscription=50.0,
-            car_payment=300.0,
-            car_down_payment=2000.0,
+            application_fee_one_time_usd=100.0,
+            rent_monthly_usd=1200.0,
+            utilities_monthly_usd=150.0,
+            insurance_yearly_usd=600.0,
+            commute_cost_monthly_usd=75.0,
+            gym_subscription_monthly_usd=50.0,
+            car_payment_monthly_usd=300.0,
+            car_down_payment_one_time_usd=2000.0,
         )
 
     def test_rental_initial_payment(self):

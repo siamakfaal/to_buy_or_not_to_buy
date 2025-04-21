@@ -13,13 +13,13 @@ class TestMortgageCalculations(unittest.TestCase):
     def setUp(self):
         # Default mortgage fixture
         self.default_mortgage_args = dict(
-            initial_loan=100_000,
-            interest=3.5,
-            term=30,
-            application_fee=300,
-            closing_cost=2_000,
-            down_payment=20_000,
-            paid_principal=0.0,
+            initial_loan_usd=100_000,
+            interest_yearly_percent=3.5,
+            term_years=30,
+            application_fee_one_time_usd=300,
+            closing_cost_one_time_usd=2_000,
+            down_payment_one_time_usd=20_000,
+            paid_principal_usd=0.0,
         )
 
     def make_mortgage(self, **overrides):
@@ -28,35 +28,39 @@ class TestMortgageCalculations(unittest.TestCase):
         return Mortgage(**args)
 
     def test_monthly_payment_normal(self):
-        mortgage = self.make_mortgage(initial_loan=300_000, interest=4.0, term=30)
+        mortgage = self.make_mortgage(
+            initial_loan_usd=300_000, interest_yearly_percent=4.0, term_years=30
+        )
         payment = mortgage_monthly_payment(mortgage)
         self.assertAlmostEqual(payment, 1432.25, places=2)
 
     def test_monthly_payment_zero_interest(self):
-        mortgage = self.make_mortgage(initial_loan=120_000, interest=0.0, term=10)
+        mortgage = self.make_mortgage(
+            initial_loan_usd=120_000, interest_yearly_percent=0.0, term_years=10
+        )
         payment = mortgage_monthly_payment(mortgage)
         self.assertEqual(payment, 1000.0)
 
     def test_remaining_balance(self):
-        mortgage = self.make_mortgage(paid_principal=20_000)
+        mortgage = self.make_mortgage(paid_principal_usd=20_000)
         balance = remaining_balance(mortgage)
         self.assertEqual(balance, 80_000)
 
     def test_remaining_balance_overpaid(self):
-        mortgage = self.make_mortgage(paid_principal=150_000)
+        mortgage = self.make_mortgage(paid_principal_usd=150_000)
         balance = remaining_balance(mortgage)
         self.assertEqual(balance, 0)
 
     def test_current_principal_payment(self):
-        mortgage = self.make_mortgage(initial_loan=200_000, interest=5.0, paid_principal=50000)
+        mortgage = self.make_mortgage(
+            initial_loan_usd=200_000, interest_yearly_percent=5.0, paid_principal_usd=50_000
+        )
         principal = current_principal_payment(mortgage)
         self.assertGreater(principal, 0)
         self.assertLess(principal, mortgage_monthly_payment(mortgage))
 
     def test_current_principal_payment_fully_paid(self):
-        mortgage = self.make_mortgage(paid_principal=100000)
-        print(mortgage)
-        print(f"{remaining_balance(mortgage) = }")
+        mortgage = self.make_mortgage(paid_principal_usd=100_000)
         principal = current_principal_payment(mortgage)
         self.assertEqual(principal, 0.0)
 
