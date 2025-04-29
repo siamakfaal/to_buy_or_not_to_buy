@@ -1,11 +1,23 @@
 # src/to_buy_or_not_to_buy/BUILD.bazel
 
 load("@rules_python//python:defs.bzl", "py_library")
+load("@python_deps//:requirements.bzl", "requirement")
 
 py_library(
-    name = "to_buy_or_not_to_buy",
+    name = "to_buy_or_not_to_buy_lib",
     srcs = glob([
         "**/*.py",
     ]),
+    deps = [
+        requirement("plotly"),
+    ],
+    visibility = ["//visibility:public"],
+)
+
+py_binary(
+    name = "to_buy_or_not_to_buy",
+    main = "main.py",
+    srcs = ["main.py"],
+    deps = [":to_buy_or_not_to_buy_lib"],
     visibility = ["//visibility:public"],
 )
