@@ -10,7 +10,7 @@ Install Bazelisk by following the instructions on the [Bazelisk GitHub page](htt
 
 #### Bazelisk on macOS
 ```
-brew install bazelisk.
+brew install bazelisk
 ```
 
 #### Bazelisk on Ubuntu
