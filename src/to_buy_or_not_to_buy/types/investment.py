@@ -26,6 +26,12 @@ class Investment:
         self.tax_yearly_percent: float = params.tax_yearly_percent
 
         self.logger: logging.Logger = logger if logger else logging.getLogger()
+        self.set_interest_yearly_percent()
+
+    def set_interest_yearly_percent(self, value: Optional[float] = None):
+        if value:
+            self.interest_yearly_percent = value
+        self.interest_monthly = self.interest_yearly_percent / 100 / 12
 
     def update_balance(self, amount_usd: float) -> None:
         self.balance_usd += amount_usd
@@ -40,8 +46,8 @@ class Investment:
         based on the current state of the investment. This function does not
         modify the investment's current state.
         """
-        total_balance = self.balance_usd + self.monthly_contribution_usd
-        interest_earning = total_balance * (self.interest_yearly_percent / 100) / 12
+
+        interest_earning = self.balance_usd * self.interest_monthly
         return InvestmentAddedValue(
             added_contribution_usd=self.monthly_contribution_usd,
             interest_earned_usd=interest_earning,

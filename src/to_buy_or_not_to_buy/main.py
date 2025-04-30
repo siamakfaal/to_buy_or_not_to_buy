@@ -1,16 +1,17 @@
 import logging
 
+from src.to_buy_or_not_to_buy.helpers.logger import create_logger
+from src.to_buy_or_not_to_buy.helpers.plots import plot_wealth_over_iterations
 from src.to_buy_or_not_to_buy.helpers.projected_wealth import property_purchase_gain
 from src.to_buy_or_not_to_buy.types.investment import Investment, InvestmentParameters
 from src.to_buy_or_not_to_buy.types.mortgage import Mortgage, MortgageParameters
 from src.to_buy_or_not_to_buy.types.rental import Rental, RentalParameters
 from src.to_buy_or_not_to_buy.types.target_property import TargetProperty, TargetPropertyParameters
 from src.to_buy_or_not_to_buy.types.variables import InvestmentProfile
-from src.to_buy_or_not_to_buy.helpers.logger import create_logger
-from src.to_buy_or_not_to_buy.helpers.plots import plot_wealth_over_iterations
+
 
 def main():
-    logger = create_logger(name = "projected_wealth", level=logging.DEBUG)
+    logger = create_logger(name="projected_wealth", level=logging.DEBUG)
 
     rental_condition = RentalParameters(
         rent_monthly_usd=4_000.00,
@@ -56,7 +57,6 @@ def main():
         investable_monthly_budget_usd=8_000.00,
     )
 
-
     # (TODO) Rent penalty for early termination
 
     iteration_details = property_purchase_gain(profile, 101, 96, logger)
@@ -64,6 +64,7 @@ def main():
     logger.info(f"Final update: {iteration_details[-1]}")
 
     plot_wealth_over_iterations(iteration_details)
+
 
 if __name__ == "__main__":
     main()

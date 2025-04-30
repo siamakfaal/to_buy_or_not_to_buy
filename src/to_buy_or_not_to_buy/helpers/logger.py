@@ -1,8 +1,11 @@
-import logging
 import datetime
+import logging
 from typing import Optional
 
-def create_logger(name: str = "default_logger", level: Optional[int] = logging.INFO) -> logging.Logger:
+
+def create_logger(
+    name: str = "default_logger", level: Optional[int] = logging.INFO
+) -> logging.Logger:
     logger = logging.getLogger(name)
     logger.setLevel(level)
 
@@ -13,7 +16,7 @@ def create_logger(name: str = "default_logger", level: Optional[int] = logging.I
         file_handler = logging.FileHandler(file_name)
         file_handler.setLevel(level)
 
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
         file_handler.setFormatter(formatter)
 
         logger.addHandler(file_handler)

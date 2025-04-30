@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 
 from src.to_buy_or_not_to_buy.types.variables import IterationDetail
 
+
 def plot_wealth_over_iterations(iteration_details: List[IterationDetail]) -> None:
 
     months = [detail.month for detail in iteration_details]
@@ -14,17 +15,21 @@ def plot_wealth_over_iterations(iteration_details: List[IterationDetail]) -> Non
     # Create the plot
     fig = go.Figure()
 
-    fig.add_trace(go.Scatter(x=months, y=investment_balance, mode='lines', name='Investment Balance'))
-    fig.add_trace(go.Scatter(x=months, y=property_net_profit, mode='lines', name='Property Net Profit'))
-    fig.add_trace(go.Scatter(x=months, y=net_wealth, mode='lines', name='Net Wealth'))
+    fig.add_trace(
+        go.Scatter(x=months, y=investment_balance, mode="lines", name="Investment Balance")
+    )
+    fig.add_trace(
+        go.Scatter(x=months, y=property_net_profit, mode="lines", name="Property Net Profit")
+    )
+    fig.add_trace(go.Scatter(x=months, y=net_wealth, mode="lines", name="Net Wealth"))
 
     # Customize layout
     fig.update_layout(
-        title='Investment Performance Over Time',
-        xaxis_title='Month',
-        yaxis_title='USD',
-        legend_title='Metrics',
-        template='plotly_white'
+        title="Investment Performance Over Time",
+        xaxis_title="Month",
+        yaxis_title="USD",
+        legend_title="Metrics",
+        template="plotly_white",
     )
 
     # Show plot

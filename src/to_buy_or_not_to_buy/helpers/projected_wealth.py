@@ -70,7 +70,9 @@ def property_purchase_gain(
             )
             current_iteration.remaining_loan_usd = profile.mortgage.remaining_balance()
 
-            current_iteration.property_net_profit_usd = current_iteration.property_value_usd - current_iteration.remaining_loan_usd
+            current_iteration.property_net_profit_usd = (
+                current_iteration.property_value_usd - current_iteration.remaining_loan_usd
+            )
 
         investment_return = profile.investment.calculate_monthly_added_value()
         profile.investment.apply_monthly_return(investment_return, apply_tax=False)

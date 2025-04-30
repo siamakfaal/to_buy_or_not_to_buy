@@ -21,3 +21,14 @@ py_binary(
     deps = [":to_buy_or_not_to_buy_lib"],
     visibility = ["//visibility:public"],
 )
+
+py_binary(
+    name = "compound_interest",
+    main = "compound_interest.py",
+    srcs = ["compound_interest.py"],
+    deps = [
+        ":to_buy_or_not_to_buy_lib",
+        requirement("plotly"),
+    ],
+    visibility = ["//visibility:public"],
+)
